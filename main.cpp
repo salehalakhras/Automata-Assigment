@@ -113,52 +113,66 @@ public:
 
 int main()
 {
-    string input, alphabet;
-    char symbol;
-    int stateName, numOfStates, fromState, toState, inputNum;
-    bool final, start;
-    cout << "-------------------------\n";
-    cout << "Pleaase enter the language alphabet concatenated ex: ab , 01 , abc\n";
-    cin >> alphabet;
-    Automata automaton(alphabet);
-    cout << "\n------------------------\n";
-    cout << "Please enter the number of states in the automaton\n";
-    cin >> numOfStates;
+    string input;
+    cout << "----------------\n";
+    cout << "Please enter the string that you want to test\n";
+    cin >> input;
+    Automata automaton(input);
+    automaton.createState(1, true, true);
+    automaton.createState(2, false, false);
+    automaton.createState(3, false, false);
+    automaton.createArc('0', 1, 1);
+    automaton.createArc('1', 1, 2);
+    automaton.createArc('0', 2, 3);
+    automaton.createArc('1', 2, 1);
+    automaton.createArc('0', 3, 2);
+    automaton.createArc('1', 3, 3);
 
-    for (int i = 0; i < numOfStates; i++)
-    {
-        cout << "\nEnter the state number (integer) and if its a start state 0 or 1 and if its a final state 0 or 1\nEample: 1 0 0 , 0 0 1\n";
-        cin >> stateName >> start >> final;
-        automaton.createState(stateName, start, final);
-    }
-    cout << "\n------------------------\n";
-    cout << "Please enter the arcs (edges) in this format:\n symbol fromState toState ex: a 0 0 (loop)";
-    for (int i = 0; i < alphabet.length() * numOfStates; i++)
-    {
-        cout << "\nEnter Arc:  ";
-        cin >> symbol >> fromState >> toState;
-        automaton.createArc(symbol, fromState, toState);
-    }
-    // automaton.createState(1, true, true);
-    // automaton.createState(2, false, false);
-    // automaton.createState(3, false, false);
-    // automaton.createArc('a', 1, 1);
-    // automaton.createArc('b', 1, 2);
-    // automaton.createArc('a', 2, 3);
-    // automaton.createArc('b', 2, 1);
-    // automaton.createArc('a', 3, 2);
-    // automaton.createArc('b', 3, 3);
-    cout << "\n------------------------\n";
-    cout << "Please the number of inputs you want to check\n";
-    cin >> inputNum;
-    for (int i = 0; i < inputNum; i++)
-    {
-        cout << "\n------------------------";
-        cout << "\nEnter the input to check:  ";
-        cin >> input;
-        if (automaton.checkString(input))
-            cout << "\nThe string \"" << input << "\" is Accepted";
-        else
-            cout << "\nThe string \"" << input << "\" is Rejected";
-    }
+    if (automaton.checkString(input))
+        cout << "The string \"" << input << "\" is Accepted\n";
+    else
+        cout << "The string \"" << input << "\" is Rejected\n";
+
+    // un comment the code below and delete the code above to create a custom automaton
+
+    /*   string input, alphabet;
+       char symbol;
+       int stateName, numOfStates, fromState, toState, inputNum;
+       bool final, start;
+       cout << "-------------------------\n";
+       cout << "Pleaase enter the language alphabet concatenated ex: ab , 01 , abc\n";
+       cin >> alphabet;
+       Automata automaton(alphabet);
+       cout << "\n------------------------\n";
+       cout << "Please enter the number of states in the automaton\n";
+       cin >> numOfStates;
+
+       for (int i = 0; i < numOfStates; i++)
+       {
+           cout << "\nEnter the state number (integer) and if its a start state 0 or 1 and if its a final state 0 or 1\nEample: 1 0 0 , 0 0 1\n";
+           cin >> stateName >> start >> final;
+           automaton.createState(stateName, start, final);
+       }
+       cout << "\n------------------------\n";
+       cout << "Please enter the arcs (edges) in this format:\n symbol fromState toState ex: a 0 0 (loop)";
+       for (int i = 0; i < alphabet.length() * numOfStates; i++)
+       {
+           cout << "\nEnter Arc:  ";
+           cin >> symbol >> fromState >> toState;
+           automaton.createArc(symbol, fromState, toState);
+       }
+
+       cout << "\n------------------------\n";
+       cout << "Please the number of inputs you want to check\n";
+       cin >> inputNum;
+       for (int i = 0; i < inputNum; i++)
+       {
+           cout << "\n------------------------";
+           cout << "\nEnter the input to check:  ";
+           cin >> input;
+           if (automaton.checkString(input))
+               cout << "\nThe string \"" << input << "\" is Accepted";
+           else
+               cout << "\nThe string \"" << input << "\" is Rejected";
+       }*/
 }
