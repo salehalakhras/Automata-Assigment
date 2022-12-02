@@ -1,0 +1,1 @@
+            cout << "\nThe string \""<<input<<"\" is Accepted";
